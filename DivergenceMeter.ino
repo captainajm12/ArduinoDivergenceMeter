@@ -51,7 +51,7 @@ unsigned long base = 47;
 unsigned long upBtn = 75;
 unsigned long downBtn = 62;
 
-void GenerateKeyTable(int vcc,int* array) {
+void generateKeyTable(int vcc,int* array) {
   float resistor;
   //1 key//
   resistor = ((float)upBtn)/(base + upBtn);
@@ -72,8 +72,8 @@ unsigned char GetKey(int value) {
 
  tmpChar = 0;
  do{
-   if(value > KeyTable[tmpChar]) Rst = value - KeyTable[tmpChar];
-   else  Rst = KeyTable[tmpChar] - value;
+   if(value > keyTable[tmpChar]) Rst = value - keyTable[tmpChar];
+   else  Rst = keyTable[tmpChar] - value;
    tmpChar ++;
  } while(Rst > 1);
 
@@ -84,12 +84,10 @@ void setup() {
  // set up the LCD's number of columns and rows: 
  lcd.begin(16, 2);
  sensorValue  = 1023;
- GenerateKeyTable(analogRead(A0),KeyTable);
+ //generateKeyTable(analogRead(A0),KeyTable);
 }
 
-void
-printVal(double v, int ms)
-{
+void printVal(double v, int ms) {
     lcd.clear();
     lcd.setCursor(4, 2);
     lcd.print(v, 6);
